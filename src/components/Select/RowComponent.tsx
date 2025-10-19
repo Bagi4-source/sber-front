@@ -10,12 +10,12 @@ export function RowComponent({
   index,
   options,
   highlight,
-  value,
+  selectedOption,
   selectOption,
   style,
 }: RowComponentProps<
   Pick<UseSelectProps, "options"> &
-    Pick<UseSelectReturn, "selectOption" | "highlight" | "value">
+    Pick<UseSelectReturn, "selectOption" | "highlight" | "selectedOption">
 >) {
   const option = options[index];
   return (
@@ -23,10 +23,10 @@ export function RowComponent({
       key={option.value}
       style={style}
       role="option"
-      aria-selected={option.value === value}
+      aria-selected={option.value === selectedOption?.value}
       className={cn(css.option, {
         [css.highlighted]: index === highlight,
-        [css.selected]: option.value === value,
+        [css.selected]: option.value === selectedOption?.value,
       })}
       onClick={() => selectOption(option)}
     >

@@ -12,7 +12,6 @@ export interface Option {
 
 export interface UseSelectProps {
   options: Option[];
-  initialValue?: string;
   onSelect?: (option: Option) => void;
 }
 
