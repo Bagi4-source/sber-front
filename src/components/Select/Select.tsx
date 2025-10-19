@@ -1,6 +1,6 @@
 import { type FC, type HTMLAttributes } from "react";
 import cn from "classnames";
-import { List } from "react-window";
+import { List, useListCallbackRef } from "react-window";
 import { useSelect } from "./useSelect";
 import type { Option } from "./types";
 import css from "./Select.module.scss";
@@ -17,6 +17,8 @@ export const Select: FC<SelectProps> = ({
   onSelect,
   placeholder = "Select",
 }) => {
+  const [listRef, setList] = useListCallbackRef(null);
+
   const {
     filter,
     isOpen,
@@ -33,7 +35,9 @@ export const Select: FC<SelectProps> = ({
     setFilter,
     selectOption,
     clearSelection,
-  } = useSelect({ options, onSelect });
+  } = useSelect({ options, onSelect, listRef });
+
+  const overscanCount = Math.min(filtered.length, 50);
 
   const displayValue = selectedOption?.name ?? filter ?? "";
 
@@ -96,9 +100,10 @@ export const Select: FC<SelectProps> = ({
             <div className={cn(css.option, css.empty)}>Нет опций</div>
           ) : (
             <List
+              listRef={setList}
               rowComponent={RowComponent}
               rowCount={filtered.length}
-              overscanCount={50}
+              overscanCount={overscanCount}
               rowHeight={34}
               rowProps={{
                 options: filtered,
@@ -106,7 +111,9 @@ export const Select: FC<SelectProps> = ({
                 selectedOption,
                 selectOption,
               }}
-              style={{ overflowX: "hidden" }}
+              style={{
+                maxHeight: 250,
+              }}
             />
           )}
         </div>

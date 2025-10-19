@@ -12,6 +12,7 @@ import type { Option, UseSelectProps, UseSelectReturn } from "./types";
 export function useSelect({
   options,
   onSelect,
+  listRef,
 }: UseSelectProps): UseSelectReturn {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [isOpen, setOpen] = useState(false);
@@ -39,11 +40,26 @@ export function useSelect({
     [filter, uniqueOptions],
   );
 
-  const open = () => setOpen(true);
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (index < 0) return;
+      listRef?.scrollToRow({
+        behavior: "smooth",
+        index,
+      });
+    },
+    [listRef],
+  );
+
+  const open = useCallback(() => {
+    setOpen(true);
+    scrollTo(highlight);
+  }, [highlight, scrollTo]);
   const close = () => setOpen(false);
 
   const clearSelection = useCallback(() => {
     setSelectedOption(null);
+    setHighlight(-1);
     setFilter("");
   }, []);
 
@@ -99,7 +115,7 @@ export function useSelect({
           break;
       }
     },
-    [filtered, highlight, isOpen, selectOption],
+    [filtered, highlight, isOpen, open, selectOption],
   );
 
   const onBlur: FocusEventHandler<HTMLDivElement> = useCallback((e) => {
@@ -119,6 +135,10 @@ export function useSelect({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    scrollTo(highlight);
+  }, [highlight, scrollTo]);
 
   useEffect(() => {
     if (!isOpen || !ref.current) return;

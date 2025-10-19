@@ -1,6 +1,5 @@
 $sber-select-width: 250px;
 $sber-select-height: 34px;
-$sber-select-max-height: 250px;
 $border-color: #f0f0f0;
 $accent: #0066cc;
 $border-width: 1px;
@@ -80,8 +79,6 @@ $option-paddings: 6px 10px;
     position: absolute;
     left: 0;
     width: 100%;
-    max-height: $sber-select-max-height;
-    overflow-y: auto;
     background: #fff;
     border: 1px solid $border-color;
     box-sizing: border-box;
@@ -98,6 +95,7 @@ $option-paddings: 6px 10px;
     }
 
     .option {
+      box-sizing: border-box;
       padding: $option-paddings;
       cursor: pointer;
       color: #000;

@@ -5,6 +5,7 @@ import type {
   RefObject,
   SetStateAction,
 } from "react";
+import type { ListImperativeAPI } from "react-window";
 
 export interface Option {
   name: string;
@@ -13,6 +14,7 @@ export interface Option {
 
 export interface UseSelectProps {
   options: Option[];
+  listRef: ListImperativeAPI | null;
   onSelect?: (option: Option) => void;
 }
 
