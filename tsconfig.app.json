@@ -20,9 +20,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "openapi-generated/*": ["./openapi-generated/*"]
+    }
   },
   "include": ["src"]
 }

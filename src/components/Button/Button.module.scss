@@ -1,16 +1,31 @@
+$btn-color: #0066cc;
+$btn-outline-width: 1px;
+$btn-outline-hover: 2px;
+$btn-outline-offset: -$btn-outline-width;
+
 .sberButton {
+  box-sizing: border-box;
   display: inline-block;
-  padding: 6px 12px;
-  color: #0066cc;
-  border: 1px solid #0066cc;
+  padding: 8px 16px;
   border-radius: 3px;
+  height: 34px;
+  line-height: 1;
+  color: $btn-color;
+  outline: $btn-outline-width solid $btn-color;
+  outline-offset: $btn-outline-offset;
   cursor: pointer;
   user-select: none;
-  transition: border-width 0.2s;
+  background-color: #fff;
 
   &:hover,
-  &:focus {
-    border-width: 2px;
-    outline: none;
+  &:focus-visible {
+    outline-width: $btn-outline-hover;
+    outline-offset: -$btn-outline-hover;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }
