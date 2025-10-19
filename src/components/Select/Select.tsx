@@ -1,86 +1,107 @@
-import React, { useState, useRef, useEffect } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
+import cn from "classnames";
+import { List } from "react-window";
+import { useSelect } from "./useSelect";
+import type { Option } from "./types";
 import css from "./Select.module.scss";
+import { RowComponent } from "./RowComponent.tsx";
 
-interface Option {
-  name: string;
-  value: string;
-}
-
-interface Props {
+interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> {
+  onSelect?: (value: Option) => void;
   options: Option[];
-  onSelect: (value: string) => void;
+  initialValue?: string;
+  placeholder?: string;
 }
 
-export const Select: React.FC<Props> = ({ options, onSelect }) => {
-  const [open, setOpen] = useState(false);
-  const [filter, setFilter] = useState("");
-  const [highlight, setHighlight] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+export const Select = forwardRef<HTMLDivElement, SelectProps>(
+  ({ options, initialValue, onSelect, placeholder = "Введите..." }) => {
+    const {
+      filter,
+      isOpen,
+      highlight,
+      ref,
+      value,
+      inputRef,
+      filtered,
+      dropUp,
+      selectedOption,
+      open,
+      close,
+      handleKeyDown,
+      setFilter,
+      selectOption,
+      clearSelection,
+    } = useSelect({ options, initialValue, onSelect });
 
-  const filtered = options.filter((o) => o.name.startsWith(filter));
-  const selected = filtered[highlight];
-
-  useEffect(() => {
-    const outsideClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
-        setOpen(false);
-    };
-    document.addEventListener("mousedown", outsideClick);
-    return () => document.removeEventListener("mousedown", outsideClick);
-  }, []);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown")
-      setHighlight((h) => Math.min(h + 1, filtered.length - 1));
-    if (e.key === "ArrowUp") setHighlight((h) => Math.max(h - 1, 0));
-    if (e.key === "Enter" && selected) {
-      onSelect(selected.value);
-      setOpen(false);
-    }
-  };
-
-  return (
-    <div
-      ref={ref}
-      className={css.sberSelect}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-    >
+    return (
       <div
-        className={`select-input ${open ? "open" : ""}`}
-        onClick={() => setOpen(!open)}
+        ref={ref}
+        className={cn(css.sberSelect, { [css.open]: isOpen })}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="select-list"
+        onBlur={(e) => {
+          if (!ref.current?.contains(e.relatedTarget as Node)) close();
+        }}
       >
-        <input
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder="Введите..."
-        />
-        {filter && (
-          <span className="clear" onClick={() => setFilter("")}>
-            ×
-          </span>
-        )}
-        <span className="arrow">▼</span>
-      </div>
-      {open && (
-        <div className="options">
-          {filtered.length === 0 && (
-            <div className="option empty">Нет опций</div>
-          )}
-          {filtered.map((opt, i) => (
-            <div
-              key={opt.value}
-              className={`option ${i === highlight ? "highlighted" : ""}`}
-              onClick={() => {
-                onSelect(opt.value);
-                setOpen(false);
+        <div className={css.inputWrapper} onClick={open}>
+          <input
+            ref={inputRef}
+            className={css.input}
+            value={isOpen ? filter : filter || selectedOption?.name}
+            onChange={(e) => {
+              if (selectedOption) {
+                clearSelection();
+              }
+              open();
+              setFilter(e.target.value);
+            }}
+            placeholder={placeholder}
+            aria-autocomplete="list"
+          />
+          {selectedOption && (
+            <span
+              className={css.clear}
+              onClick={(e) => {
+                e.stopPropagation();
+                clearSelection();
               }}
             >
-              {opt.name}
-            </div>
-          ))}
+              ×
+            </span>
+          )}
+          <span className={css.arrow}>▼</span>
         </div>
-      )}
-    </div>
-  );
-};
+
+        {isOpen && (
+          <div
+            role="listbox"
+            className={cn(css.options, { [css.dropUp]: dropUp })}
+          >
+            {filtered.length === 0 ? (
+              <div className={cn(css.option, css.empty)}>Нет опций</div>
+            ) : (
+              <List
+                rowComponent={RowComponent}
+                rowCount={filtered.length}
+                rowHeight={34}
+                rowProps={{
+                  options: filtered,
+                  highlight,
+                  value,
+                  selectOption,
+                }}
+                style={{ overflowX: "hidden" }}
+              />
+            )}
+          </div>
+        )}
+      </div>
+    );
+  },
+);
+
+Select.displayName = "Select";

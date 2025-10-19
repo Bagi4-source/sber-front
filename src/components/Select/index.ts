@@ -1,1 +1,1 @@
-export * from "./Select.tsx";
+export * from "./Select";

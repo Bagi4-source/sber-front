@@ -1,61 +1,110 @@
+$sber-select-width: 250px;
+$sber-select-height: 34px;
+$sber-select-max-height: 250px;
+$border-color: #f0f0f0;
+$accent: #0066cc;
+$outline-width: 1px;
+$outline-hover: 2px;
+$option-paddings: 6px 10px;
+
 .sberSelect {
   position: relative;
-  width: 250px;
-  border: 1px solid #f0f0f0;
+  width: $sber-select-width;
+  height: $sber-select-height;
+  line-height: 1;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  outline: $outline-width solid $border-color;
+  outline-offset: -$outline-width;
+  user-select: none;
+  background: #fff;
+  transition: outline-width 0.15s ease, outline-offset 0.15s ease;
 
-  &:focus-within .select-input {
-    border-bottom: 2px solid #0066cc;
+  &.open,
+  &:focus-within {
+    outline: $outline-hover solid $accent;
+    outline-offset: -$outline-hover;
   }
 
-  .select-input {
+  .inputWrapper {
     display: flex;
     align-items: center;
-    padding: 6px;
-    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    padding: $option-paddings;
+    box-sizing: border-box;
+    cursor: text;
+  }
 
-    input {
-      flex: 1;
-      border: none;
-      outline: none;
-    }
+  .input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font: inherit;
+    background: transparent;
+    color: #000;
+  }
 
-    .clear {
-      cursor: pointer;
-      margin-right: 5px;
-      visibility: hidden;
-    }
+  .clear {
+    visibility: hidden;
+    margin-right: 6px;
+    cursor: pointer;
+  }
 
-    &:hover .clear {
-      visibility: visible;
-    }
+  &:hover .clear {
+    visibility: visible;
+  }
 
-    .arrow {
-      color: #888;
-    }
+  .arrow {
+    font-size: 10px;
+    color: #000;
+    pointer-events: none;
   }
 
   .options {
     position: absolute;
+    left: 0;
     width: 100%;
-    background: white;
-    max-height: 250px;
+    max-height: $sber-select-max-height;
     overflow-y: auto;
-  }
+    background: #fff;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    z-index: 10;
+    top: 100%;
+    margin-top: 2px;
+    border-radius: 3px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-  .option {
-    padding: 6px;
-    cursor: pointer;
-
-    &.highlighted {
-      background: #e8e8e8;
+    &.dropUp {
+      bottom: 100%;
+      margin-bottom: 2px;
+      top: auto;
     }
 
-    &:hover {
-      background: #f0f0f0;
-    }
+    .option {
+      padding: $option-paddings;
+      cursor: pointer;
+      color: #000;
+      background: #fff;
 
-    &.empty {
-      color: #aaa;
+      &:hover {
+        background: #f0f0f0;
+      }
+
+      &.highlighted {
+        background: #e8e8e8;
+      }
+
+      &.selected {
+        background: #dedede;
+      }
+
+      &.empty {
+        color: #999;
+        cursor: default;
+      }
     }
   }
 }

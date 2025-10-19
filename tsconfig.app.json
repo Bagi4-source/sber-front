@@ -25,7 +25,8 @@
     "paths": {
       "src/*": ["./src/*"],
       "openapi-generated/*": ["./openapi-generated/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"]
 }
