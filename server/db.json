@@ -1,0 +1,31 @@
+{
+  "options": [
+    {
+      "id": 1,
+      "name": "Опция 1",
+      "value": "option1"
+    },
+    {
+      "id": 2,
+      "name": "Опция 2",
+      "value": "option2"
+    },
+    {
+      "id": 3,
+      "name": "Опция 3",
+      "value": "option3"
+    },
+    {
+      "id": 4,
+      "name": "Опция 4",
+      "value": "option4"
+    },
+    {
+      "id": 5,
+      "name": "Опция 5",
+      "value": "option5"
+    }
+  ],
+  "selectedOptions": [],
+  "messages": []
+}
