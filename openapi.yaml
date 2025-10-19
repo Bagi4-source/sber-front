@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Select API
+  version: 1.0.0
+
+paths:
+  /options/for/select:
+    get:
+      summary: Get options
+      operationId: getOptions
+      tags:
+        - Options
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Option'
+  /selected/option:
+    post:
+      summary: Submit selected option
+      operationId: postSelectedOption
+      tags:
+        - Options
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedOption'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerMessage'
+
+components:
+  schemas:
+    Option:
+      type: object
+      required: [name, value]
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    SelectedOption:
+      type: object
+      required: [value]
+      properties:
+        value:
+          type: string
+    ServerMessage:
+      type: object
+      properties:
+        message:
+          type: string
