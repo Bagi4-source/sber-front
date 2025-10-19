@@ -98,6 +98,7 @@ export const Select: FC<SelectProps> = ({
             <List
               rowComponent={RowComponent}
               rowCount={filtered.length}
+              overscanCount={50}
               rowHeight={34}
               rowProps={{
                 options: filtered,
