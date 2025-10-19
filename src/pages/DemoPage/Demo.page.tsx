@@ -1,4 +1,4 @@
-import { Button, Select } from "src/components";
+import { Button, MessageText, Select } from "src/components";
 import {
   type Option,
   useGetOptionsQuery,
@@ -6,6 +6,7 @@ import {
 } from "src/store/optionsApi.ts";
 import { useState } from "react";
 import { getErrorMessage } from "src/utils";
+import css from "./Demo.page.module.scss";
 
 export const DemoPage = () => {
   const { data: options = [], isLoading } = useGetOptionsQuery();
@@ -31,29 +32,9 @@ export const DemoPage = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: 350,
-          maxWidth: 350,
-          margin: "0 auto",
-        }}
-      >
-        <div
-          style={{
-            display: "inline-flex",
-            gap: "10px",
-            alignItems: "center",
-          }}
-        >
+    <div className={css.mainWrapper}>
+      <div className={css.centered}>
+        <div className={css.formWrapper}>
           <Select
             options={options}
             value={selectedValue}
@@ -67,11 +48,11 @@ export const DemoPage = () => {
             {isSubmitting ? "Отправка..." : "Отправить"}
           </Button>
         </div>
-        <div style={{ marginTop: 20 }}>
+        <MessageText>
           {isSubmitError
             ? getErrorMessage(submitError)
             : serverMessage?.message}
-        </div>
+        </MessageText>
       </div>
     </div>
   );
