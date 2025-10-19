@@ -12,15 +12,23 @@ export default defineConfig({
         replacement: fileURLToPath(new URL("./src", import.meta.url)),
       },
       {
-        find: "openapi-generated",
-        replacement: fileURLToPath(
-          new URL("./openapi-generated", import.meta.url),
-        ),
-      },
-      {
         find: "node_modules",
         replacement: fileURLToPath(new URL("./node_modules", import.meta.url)),
       },
     ],
+  },
+  server: {
+    proxy: {
+      "/options/for/select": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/selected/option": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });

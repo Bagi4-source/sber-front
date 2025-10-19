@@ -9,7 +9,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import unusedImports from "eslint-plugin-unused-imports";
 
 export default tseslint.config([
-  globalIgnores(["dist", "scripts", "definitions"]),
+  globalIgnores(["dist", "scripts"]),
   {
     plugins: {
       "unused-imports": unusedImports,
