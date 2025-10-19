@@ -12,9 +12,12 @@ import type { Option, UseSelectProps, UseSelectReturn } from "./types";
 export function useSelect({
   options,
   onSelect,
+  value,
   listRef,
 }: UseSelectProps): UseSelectReturn {
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOption, setSelectedOption] = useState<Option | null>(
+    value ?? null,
+  );
   const [isOpen, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
   const [filter, setFilter] = useState("");
@@ -58,10 +61,11 @@ export function useSelect({
   const close = () => setOpen(false);
 
   const clearSelection = useCallback(() => {
+    onSelect?.(null);
     setSelectedOption(null);
     setHighlight(-1);
     setFilter("");
-  }, []);
+  }, [onSelect]);
 
   const selectOption = useCallback(
     (option: Option) => {
@@ -121,6 +125,10 @@ export function useSelect({
   const onBlur: FocusEventHandler<HTMLDivElement> = useCallback((e) => {
     if (!ref.current?.contains(e.relatedTarget)) close();
   }, []);
+
+  useEffect(() => {
+    setSelectedOption(value ?? null);
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

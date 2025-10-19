@@ -2,18 +2,19 @@ import { type FC, type HTMLAttributes } from "react";
 import cn from "classnames";
 import { List, useListCallbackRef } from "react-window";
 import { useSelect } from "./useSelect";
-import type { Option } from "./types";
+import type { UseSelectProps } from "./types";
 import css from "./Select.module.scss";
 import { RowComponent } from "./RowComponent.tsx";
 
-interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> {
-  onSelect?: (value: Option) => void;
-  options: Option[];
+interface SelectProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect">,
+    Pick<UseSelectProps, "onSelect" | "options" | "value"> {
   placeholder?: string;
 }
 
 export const Select: FC<SelectProps> = ({
   options,
+  value,
   onSelect,
   placeholder = "Select",
 }) => {
@@ -35,7 +36,7 @@ export const Select: FC<SelectProps> = ({
     setFilter,
     selectOption,
     clearSelection,
-  } = useSelect({ options, onSelect, listRef });
+  } = useSelect({ options, onSelect, listRef, value });
 
   const overscanCount = Math.min(filtered.length, 50);
 

@@ -26,6 +26,275 @@
       "value": "option5"
     }
   ],
-  "selectedOptions": [],
+  "selectedOptions": [
+    {
+      "value": "option3",
+      "id": 1
+    },
+    {
+      "value": "option2",
+      "id": 2
+    },
+    {
+      "value": "option4",
+      "id": 3
+    },
+    {
+      "value": "option3",
+      "id": 4
+    },
+    {
+      "value": "option5",
+      "id": 5
+    },
+    {
+      "value": "option3",
+      "id": 6
+    },
+    {
+      "value": "option3",
+      "id": 7
+    },
+    {
+      "value": "option3",
+      "id": 8
+    },
+    {
+      "value": "option3",
+      "id": 9
+    },
+    {
+      "value": "option4",
+      "id": 10
+    },
+    {
+      "value": "option4",
+      "id": 11
+    },
+    {
+      "value": "option3",
+      "id": 12
+    },
+    {
+      "value": "option3",
+      "id": 13
+    },
+    {
+      "value": "option4",
+      "id": 14
+    },
+    {
+      "value": "option3",
+      "id": 15
+    },
+    {
+      "value": "option3",
+      "id": 16
+    },
+    {
+      "value": "option3",
+      "id": 17
+    },
+    {
+      "value": "option3",
+      "id": 18
+    },
+    {
+      "value": "option3",
+      "id": 19
+    },
+    {
+      "value": "option4",
+      "id": 20
+    },
+    {
+      "value": "option4",
+      "id": 21
+    },
+    {
+      "value": "option4",
+      "id": 22
+    },
+    {
+      "value": "option2",
+      "id": 23
+    },
+    {
+      "value": "option4",
+      "id": 24
+    },
+    {
+      "value": "option4",
+      "id": 25
+    },
+    {
+      "value": "option3",
+      "id": 26
+    },
+    {
+      "value": "option5",
+      "id": 27
+    },
+    {
+      "value": "option1",
+      "id": 28
+    },
+    {
+      "value": "option3",
+      "id": 29
+    },
+    {
+      "value": "option3",
+      "id": 30
+    },
+    {
+      "value": "option3",
+      "id": 31
+    },
+    {
+      "value": "option4",
+      "id": 32
+    },
+    {
+      "value": "option2",
+      "id": 33
+    },
+    {
+      "value": "option3",
+      "id": 34
+    },
+    {
+      "value": "option2",
+      "id": 35
+    },
+    {
+      "value": "option4",
+      "id": 36
+    },
+    {
+      "value": "option3",
+      "id": 37
+    },
+    {
+      "value": "option3",
+      "id": 38
+    },
+    {
+      "value": "option2",
+      "id": 39
+    },
+    {
+      "value": "option3",
+      "id": 40
+    },
+    {
+      "value": "option4",
+      "id": 41
+    },
+    {
+      "value": "option5",
+      "id": 42
+    },
+    {
+      "value": "option4",
+      "id": 43
+    },
+    {
+      "value": "option3",
+      "id": 44
+    },
+    {
+      "value": "option3",
+      "id": 45
+    },
+    {
+      "value": "option4",
+      "id": 46
+    },
+    {
+      "value": "option5",
+      "id": 47
+    },
+    {
+      "value": "option4",
+      "id": 48
+    },
+    {
+      "value": "option2",
+      "id": 49
+    },
+    {
+      "value": "option3",
+      "id": 50
+    },
+    {
+      "value": "option4",
+      "id": 51
+    },
+    {
+      "value": "option4",
+      "id": 52
+    },
+    {
+      "value": "option4",
+      "id": 53
+    },
+    {
+      "value": "option5",
+      "id": 54
+    },
+    {
+      "value": "option2",
+      "id": 55
+    },
+    {
+      "value": "option4",
+      "id": 56
+    },
+    {
+      "value": "option3",
+      "id": 57
+    },
+    {
+      "value": "option3",
+      "id": 58
+    },
+    {
+      "value": "option4",
+      "id": 59
+    },
+    {
+      "value": "option4",
+      "id": 60
+    },
+    {
+      "value": "option2",
+      "id": 61
+    },
+    {
+      "value": "option4",
+      "id": 62
+    },
+    {
+      "value": "option3",
+      "id": 63
+    },
+    {
+      "value": "option5",
+      "id": 64
+    },
+    {
+      "value": "option1",
+      "id": 65
+    },
+    {
+      "value": "option2",
+      "id": 66
+    },
+    {
+      "value": "option3",
+      "id": 67
+    }
+  ],
   "messages": []
 }

@@ -15,7 +15,8 @@ export interface Option {
 export interface UseSelectProps {
   options: Option[];
   listRef: ListImperativeAPI | null;
-  onSelect?: (option: Option) => void;
+  value?: Option | null;
+  onSelect?: (option: Option | null) => void;
 }
 
 export interface UseSelectReturn {
