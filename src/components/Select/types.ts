@@ -1,5 +1,6 @@
 import type {
   Dispatch,
+  FocusEventHandler,
   KeyboardEventHandler,
   RefObject,
   SetStateAction,
@@ -20,6 +21,7 @@ export interface UseSelectReturn {
   filter: string;
   highlight: number;
   value?: string;
+  onBlur: FocusEventHandler<HTMLDivElement>;
   handleKeyDown: KeyboardEventHandler<HTMLDivElement>;
   ref: RefObject<HTMLDivElement | null>;
   inputRef: RefObject<HTMLInputElement | null>;

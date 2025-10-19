@@ -26,6 +26,7 @@ export const Select: FC<SelectProps> = ({
     filtered,
     dropUp,
     selectedOption,
+    onBlur,
     open,
     close,
     handleKeyDown,
@@ -42,13 +43,11 @@ export const Select: FC<SelectProps> = ({
       className={cn(css.sberSelect, { [css.open]: isOpen })}
       tabIndex={0}
       onKeyDown={handleKeyDown}
+      onBlur={onBlur}
       role="combobox"
       aria-haspopup="listbox"
       aria-expanded={isOpen}
       aria-controls="select-list"
-      onBlur={(e) => {
-        if (!ref.current?.contains(e.relatedTarget as Node)) close();
-      }}
     >
       <div className={css.inputWrapper} onClick={open}>
         <input

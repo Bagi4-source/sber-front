@@ -5,6 +5,7 @@ import {
   type KeyboardEventHandler,
   useMemo,
   useCallback,
+  type FocusEventHandler,
 } from "react";
 import type { Option, UseSelectProps, UseSelectReturn } from "./types";
 
@@ -101,9 +102,17 @@ export function useSelect({
     [filtered, highlight, isOpen, selectOption],
   );
 
+  const onBlur: FocusEventHandler<HTMLDivElement> = useCallback((e) => {
+    if (!ref.current?.contains(e.relatedTarget)) close();
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (
+        ref.current &&
+        e.target instanceof Node &&
+        !ref.current.contains(e.target)
+      ) {
         setOpen(false);
       }
     };
@@ -127,6 +136,7 @@ export function useSelect({
     dropUp,
     selectedOption,
     handleKeyDown,
+    onBlur,
     open,
     close,
     setFilter,
